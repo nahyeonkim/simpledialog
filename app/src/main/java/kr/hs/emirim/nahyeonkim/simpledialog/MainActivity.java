@@ -1,10 +1,12 @@
 package kr.hs.emirim.nahyeonkim.simpledialog;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -27,7 +29,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialog.setTitle("First Dialog");
         dialog.setMessage("This is Message");
         dialog.setIcon(R.drawable.first);
-        dialog.setPositiveButton("OK",null);
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            /**
+             * This method will be invoked when a button in the dialog is clicked.
+             *
+             * @param dialog The dialog that received the click.
+             * @param which  The button that was clicked (e.g.
+             *               {@link DialogInterface#BUTTON1}) or the position
+             */
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "대화상자의 확인 버튼을 클릭했음", Toast.LENGTH_LONG).show();
+            }
+        });
 
         dialog.show();
     }
