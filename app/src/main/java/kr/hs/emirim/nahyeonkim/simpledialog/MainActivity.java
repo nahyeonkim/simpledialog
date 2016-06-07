@@ -9,13 +9,15 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
+    String[] items={"젤리빈","킷켓","롤리팝"};
+    Button but;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button but=(Button)findViewById(R.id.but_dialog);
+        but=(Button)findViewById(R.id.but_dialog);
         but.setOnClickListener(this);
+
     }
 
     /**
@@ -27,7 +29,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("First Dialog");
-        dialog.setMessage("This is Message");
+        dialog.setItems(items, new DialogInterface.OnClickListener() {
+            /**
+             * This method will be invoked when a button in the dialog is clicked.
+             *
+             * @param dialog The dialog that received the click.
+             * @param which  The button that was clicked (e.g.
+             *               {@link DialogInterface#BUTTON1}) or the position
+             */
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                but.setText(items[which]);
+            }
+        });
         dialog.setIcon(R.drawable.first);
         dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             /**
